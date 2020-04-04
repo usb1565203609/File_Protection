@@ -1,0 +1,86 @@
+;
+; CKProtect.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=CKProtect.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+CKProtect_Device_CoInstaller_CopyFiles = 11
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+CKProtect.sys  = 1,,
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%CKProtect.DeviceDesc%=CKProtect_Device, Root\CKProtect ; TODO: edit hw-id
+
+[CKProtect_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+CKProtect.sys
+
+;-------------- Service installation
+[CKProtect_Device.NT.Services]
+AddService = CKProtect,%SPSVCINST_ASSOCSERVICE%, CKProtect_Service_Inst
+
+; -------------- CKProtect driver install sections
+[CKProtect_Service_Inst]
+DisplayName    = %CKProtect.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\CKProtect.sys
+
+;
+;--- CKProtect_Device Coinstaller installation ------
+;
+
+[CKProtect_Device.NT.CoInstallers]
+AddReg=CKProtect_Device_CoInstaller_AddReg
+CopyFiles=CKProtect_Device_CoInstaller_CopyFiles
+
+[CKProtect_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[CKProtect_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[CKProtect_Device.NT.Wdf]
+KmdfService =  CKProtect, CKProtect_wdfsect
+[CKProtect_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "CKProtect Installation Disk"
+CKProtect.DeviceDesc = "CKProtect Device"
+CKProtect.SVCDESC = "CKProtect Service"

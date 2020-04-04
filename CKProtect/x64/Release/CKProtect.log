@@ -1,0 +1,31 @@
+﻿  Building 'CKProtect' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Release\CKProtect.inf
+  Stamping [Version] section with DriverVer=04/04/2020,15.3.41.332
+  CKPro.c
+g:\vs\ck_pro-master\ckprotect\myhead.h(38): warning C4214: 使用了非标准扩展: 整形以外的位域类型
+g:\vs\ck_pro-master\ckprotect\myhead.h(39): warning C4201: 使用了非标准扩展: 无名称的结构/联合
+g:\vs\ck_pro-master\ckprotect\myhead.h(40): warning C4201: 使用了非标准扩展: 无名称的结构/联合
+g:\vs\ck_pro-master\ckprotect\ckpro.c(8): warning C4100: “RegisterPath”: 未引用的形参
+g:\vs\ck_pro-master\ckprotect\ckpro.c(58): warning C4100: “RegistrationContext”: 未引用的形参
+g:\vs\ck_pro-master\ckprotect\ckpro.c(62): warning C4101: “uniDosName”: 未引用的局部变量
+g:\vs\ck_pro-master\ckprotect\ckpro.c(133): warning C4100: “DriverObject”: 未引用的形参
+g:\vs\ck_pro-master\ckprotect\ckpro.c(110): warning C4715: “GetFilePathforObject”: 不是所有的控件路径都返回值
+  CKProtect.vcxproj -> G:\vs\CK_pro-master\x64\Release\CKProtect.sys
+  Done Adding Additional Store
+  Successfully signed: G:\vs\CK_pro-master\x64\Release\CKProtect.sys
+  
+  Driver is a Universal Driver.
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  G:\vs\CK_pro-master\x64\Release\CKProtect\ckprotect.cat
+  Done Adding Additional Store
+  Successfully signed: G:\vs\CK_pro-master\x64\Release\CKProtect\ckprotect.cat
+  
